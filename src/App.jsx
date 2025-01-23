@@ -5,22 +5,18 @@ const API_ENDPOINT = 'https://api.helsedirektoratet.no/helserefusjon/v1/takstkod
 
 function App() {
   
-  const [validDate, setValidDate] = React.useState();
+  const [validDate, setValidDate] = React.useState(new Date().toISOString().split("T")[0]);
 
   const [tariffs, setTariffs] = React.useState([]);
 
   const [subjectArea, setSubjectArea] = React.useState('PO');
 
-  const [tariffCode, setTariffCode] = React.useState();
+  const [tariffCode, setTariffCode] = React.useState('');
 
   const handleInputChange = (event) => {
     setValidDate(event.target.value);
   }
-
-  React.useEffect(() => {
-    setValidDate(new Date().toISOString().split("T")[0]);
-  }, [])
-
+ 
   const handleTodayClick = () => {
     setValidDate(new Date().toISOString().split("T")[0]);
   };
