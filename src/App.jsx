@@ -48,7 +48,8 @@ function App() {
 
   return (
     <>
-     <h1>Takster hentet fra Helsedirektoratet</h1>
+     <h1>Takster hentet fra Helsedirektoratets API</h1>
+     <h3>Dette nettstedet er utviklet av Asbjørn Engås. Dette er <em>IKKE</em> et offisielt nettsted for Helsedirektoratet, og det har ingen tilknytning til Helsedirektoratet.</h3>
      <p>
       <label htmlFor="subjectAreaSelect">Fagområde:    </label> 
       <select id="subjectAreaSelect" onChange={handleSubjectAreaChange}>
