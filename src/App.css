@@ -39,10 +39,15 @@ body {
     display: flex;
     align-items: center;
   }
+
+  .input-group label {
+    margin-right: 10px;
+  }
   
   .input-group input {
     flex: 1;
     margin-right: 10px;
+    min-width: 100px;
   }
   
   .small-button {

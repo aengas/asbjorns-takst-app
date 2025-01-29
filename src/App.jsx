@@ -76,7 +76,9 @@ function App() {
       <h1>Takster hentet fra Helsedirektoratets API</h1>
       <h3>Dette nettstedet er utviklet av Asbjørn Engås. Dette er <em>IKKE</em> et offisielt nettsted for Helsedirektoratet, og det har ingen tilknytning til Helsedirektoratet.</h3>
       <p>
-        <SubjectAreaComboBox subjectArea={subjectArea} onSubjectAreaChange={handleSubjectAreaChange}/>
+        <div className="input-group">
+         <SubjectAreaComboBox subjectArea={subjectArea} onSubjectAreaChange={handleSubjectAreaChange}/>
+        </div>
       </p>
       <div className="input-group">
         <InputWithLabel id="validDateInput" value={validDate} onInputChange={handleInputChange}>Gyldig dato: </InputWithLabel>
@@ -84,7 +86,9 @@ function App() {
       </div>
       <label><em> Filtrerer takstene til kun de som er gyldig på en gitt dato. Dato på formatet yyyy-MM-dd:</em></label>
       <p>
-        <InputWithLabel id="tariffCodeInput" value={tariffCode} onInputChange={handleTariffCodeChange}>Takstkode: </InputWithLabel>
+        <div className="input-group">
+         <InputWithLabel id="tariffCodeInput" value={tariffCode} onInputChange={handleTariffCodeChange}>Takstkode: </InputWithLabel>
+        </div>
         <label><em> Filtrer takstene til en gitt kode, kan kombineres med de andre parametrene eller brukes alene.</em></label>
       </p>
       <p className="button-group">
