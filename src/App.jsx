@@ -1,17 +1,29 @@
 import * as React from 'react';
 import axios from 'axios';
 
+const useStorageState = (key, initialState) => {
+  const [value, setValue] = React.useState(
+    localStorage.getItem(key) || initialState
+  );
+
+  React.useEffect(() => {
+    localStorage.setItem(key, value);
+  },[value, key]);
+
+  return [value, setValue];
+};
+
 const API_ENDPOINT = 'https://api.helsedirektoratet.no/helserefusjon/v1/takstkoder';
 
 function App() {
   
-  const [validDate, setValidDate] = React.useState(new Date().toISOString().split("T")[0]);
+  const [validDate, setValidDate] = useStorageState('validDate', new Date().toISOString().split("T")[0]);
 
   const [tariffs, setTariffs] = React.useState([]);
 
-  const [subjectArea, setSubjectArea] = React.useState('PO');
+  const [subjectArea, setSubjectArea] = useStorageState('subjectArea', 'PO');
 
-  const [tariffCode, setTariffCode] = React.useState('');
+  const [tariffCode, setTariffCode] = useStorageState('tariffCode', '');
 
   const [url, setUrl] = React.useState(`${API_ENDPOINT}?fagomraade=${subjectArea}&gyldigdato=${validDate}&takstkode=${tariffCode}`);
 
@@ -63,7 +75,7 @@ function App() {
      <h1>Takster hentet fra Helsedirektoratets API</h1>
      <h3>Dette nettstedet er utviklet av Asbjørn Engås. Dette er <em>IKKE</em> et offisielt nettsted for Helsedirektoratet, og det har ingen tilknytning til Helsedirektoratet.</h3>
      <p>
-      <SubjectAreaComboBox onSubjectAreaChange={handleSubjectAreaChange}/>
+      <SubjectAreaComboBox subjectArea={subjectArea} onSubjectAreaChange={handleSubjectAreaChange}/>
      </p>
      <p>
       <InputWithLabel id="validDateInput" value={validDate} onInputChange={handleInputChange}>Gyldig dato: </InputWithLabel>
@@ -83,11 +95,12 @@ function App() {
 }
 
 const SubjectAreaComboBox = ({
+  subjectArea,
   onSubjectAreaChange
 }) => (
     <>
       <label htmlFor="subjectAreaSelect">Fagområde:    </label> 
-      <select id="subjectAreaSelect" onChange={onSubjectAreaChange}>
+      <select id="subjectAreaSelect" value={subjectArea} onChange={onSubjectAreaChange}>
         <option value="ALLE">Alle</option>
         <option value="AP">Audiopedagog</option>
         <option value="BE">Behandlingsreiser i utlandet</option>
@@ -100,7 +113,7 @@ const SubjectAreaComboBox = ({
         <option value="LOGO">Logoped</option>
         <option value="LR">Private lab/radiologi</option>
         <option value="OR">Ortoptist</option>
-        <option value="PO" selected>Poliklinikk</option>
+        <option value="PO">Poliklinikk</option>
         <option value="PS">Psykolog</option>
         <option value="PT">Primærhelseteam</option>
         <option value="RE">Rehabiliteringsinstitusjon</option>
