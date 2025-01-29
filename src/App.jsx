@@ -13,6 +13,8 @@ function App() {
 
   const [tariffCode, setTariffCode] = React.useState('');
 
+  const [url, setUrl] = React.useState(`${API_ENDPOINT}?fagomraade=${subjectArea}&gyldigdato=${validDate}&takstkode=${tariffCode}`);
+
   const handleInputChange = (event) => {
     setValidDate(event.target.value);
   }
@@ -21,22 +23,19 @@ function App() {
     setValidDate(new Date().toISOString().split("T")[0]);
   };
 
-  const handleGetTariffsClick = async () => {
-    let result = '';
-    if(subjectArea === "ALLE")
-    {
-       result = await axios.get(`${API_ENDPOINT}?gyldigdato=${validDate}&takstkode=${tariffCode}`);
-    }
-    else {
-       result = await axios.get(`${API_ENDPOINT}?fagomraade=${subjectArea}&gyldigdato=${validDate}&takstkode=${tariffCode}`);
-    }
-
+  const handleGetTariffs = React.useCallback(async () => { 
+    let result = await axios.get(url);
+    
     const sortedTariffs = result.data.takstkoder.sort((a, b) => {
       return a.takstkode.localeCompare(b.takstkode);  
     });
 
     setTariffs(sortedTariffs);
-  };
+  }, [url]);
+
+  React.useEffect(() => {
+    handleGetTariffs()
+  }, [handleGetTariffs]);
 
   const handleSubjectAreaChange = (event) => {
     setSubjectArea(event.target.value);
@@ -45,6 +44,19 @@ function App() {
   const handleTariffCodeChange = (event) => {
     setTariffCode(event.target.value);
   }
+
+  const handleGetTariffsClick = (event) => {
+    if(subjectArea === "ALLE")
+    {
+      setUrl(`${API_ENDPOINT}?gyldigdato=${validDate}&takstkode=${tariffCode}`);
+    }
+    else
+    {
+      setUrl(`${API_ENDPOINT}?fagomraade=${subjectArea}&gyldigdato=${validDate}&takstkode=${tariffCode}`);
+    }
+
+    event.preventDefault();
+  };
 
   return (
     <>
