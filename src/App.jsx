@@ -63,8 +63,31 @@ function App() {
      <h1>Takster hentet fra Helsedirektoratets API</h1>
      <h3>Dette nettstedet er utviklet av Asbjørn Engås. Dette er <em>IKKE</em> et offisielt nettsted for Helsedirektoratet, og det har ingen tilknytning til Helsedirektoratet.</h3>
      <p>
+      <SubjectAreaComboBox onSubjectAreaChange={handleSubjectAreaChange}/>
+     </p>
+     <p>
+      <InputWithLabel id="validDateInput" value={validDate} onInputChange={handleInputChange}>Gyldig dato: </InputWithLabel>
+      <button onClick={handleTodayClick}>Dagens dato</button>
+      <label><em> Filtrerer takstene til kun de som er gyldig på en gitt dato. Dato på formatet yyyy-MM-dd:</em></label>
+     </p>
+     <p>
+      <InputWithLabel id="tariffCodeInput" value={tariffCode} onInputChange={handleTariffCodeChange}>Takstkode: </InputWithLabel>
+      <label><em> Filtrer takstene til en gitt kode, kan kombineres med de andre parametrene eller brukes alene.</em></label>
+     </p>
+     <p>
+      <button onClick={handleGetTariffsClick}>Hent takster</button>
+     </p>
+     <TariffTable tariffs={tariffs} />
+    </>
+  )
+}
+
+const SubjectAreaComboBox = ({
+  onSubjectAreaChange
+}) => (
+    <>
       <label htmlFor="subjectAreaSelect">Fagområde:    </label> 
-      <select id="subjectAreaSelect" onChange={handleSubjectAreaChange}>
+      <select id="subjectAreaSelect" onChange={onSubjectAreaChange}>
         <option value="ALLE">Alle</option>
         <option value="AP">Audiopedagog</option>
         <option value="BE">Behandlingsreiser i utlandet</option>
@@ -84,22 +107,21 @@ function App() {
         <option value="TH">Tannhelse</option>
         <option value="TP">Tannpleier</option>
       </select>
-     </p>
-     <p>
-      <label htmlFor="validDateInput">Gyldig dato: </label>    
-      <input id="validDateInput" value={validDate} onChange={handleInputChange}/>
-      <button onClick={handleTodayClick}>Dagens dato</button>
-      <label><em> Filtrerer takstene til kun de som er gyldig på en gitt dato. Dato på formatet yyyy-MM-dd:</em></label>
-     </p>
-     <p>
-      <label htmlFor="tariffCodeInput">Takstkode: </label>
-      <input id="tariffCodeInput" value={tariffCode} onChange={handleTariffCodeChange}></input>
-      <label><em> Filtrer takstene til en gitt kode, kan kombineres med de andre parametrene eller brukes alene.</em></label>
-     </p>
-     <p>
-      <button onClick={handleGetTariffsClick}>Hent takster</button>
-     </p>
-     <table border="1">
+    </>
+)
+
+const InputWithLabel = ({id, value, type='text', onInputChange, children}) => (
+    <> 
+     <label htmlFor={id}>{children}</label>    
+     <input id={id} value={value} type={type} onChange={onInputChange}/>
+    </>
+);
+
+const TariffTable = ({
+  tariffs
+}) => (
+  <>
+   <table border="1">
         <thead>
           <tr>
             <th>Takstkode</th>
@@ -117,24 +139,29 @@ function App() {
         </thead>
         <tbody>
           {tariffs.map((item) => (
-            <tr key={item.takst_id}>
-              <td>{item.takstkode}</td>
-              <td>{item.fagomraade}</td>
-              <td>{item.fradato}</td>
-              <td>{item.tildato}</td>
-              <td>{item.honorar}</td>
-              <td>{item.refusjon}</td>
-              <td>{item.pasient_egenbetaling}</td>
-              <td>{item.repetisjonsprosent}</td>
-              <td>{item.ugyldig_kombinasjon}</td>
-              <td>{item.tidsbruk_per_rep}</td>
-              <td>{item.beskrivelse}</td>
-            </tr>
+            <TariffItem 
+             key={item.takst_id} 
+             item={item} />
           ))}
         </tbody>
       </table>
-    </>
-  )
-}
+  </>
+);
+
+const TariffItem = ( {item }) => (
+  <tr>
+    <td>{item.takstkode}</td>
+    <td>{item.fagomraade}</td>
+    <td>{item.fradato}</td>
+    <td>{item.tildato}</td>
+    <td>{item.honorar}</td>
+    <td>{item.refusjon}</td>
+    <td>{item.pasient_egenbetaling}</td>
+    <td>{item.repetisjonsprosent}</td>
+    <td>{item.ugyldig_kombinasjon}</td>
+    <td>{item.tidsbruk_per_rep}</td>
+    <td>{item.beskrivelse}</td>
+  </tr>
+);
 
 export default App;
