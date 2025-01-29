@@ -23,9 +23,9 @@ function App() {
   const [tariffs, setTariffs] = React.useState([]);
 
   const [subjectArea, setSubjectArea] = useStorageState('subjectArea', 'PO');
-
+  
   const [tariffCode, setTariffCode] = useStorageState('tariffCode', '');
-
+  
   const [url, setUrl] = React.useState(`${API_ENDPOINT}?fagomraade=${subjectArea}&gyldigdato=${validDate}&takstkode=${tariffCode}`);
 
   const handleInputChange = (event) => {
@@ -42,7 +42,7 @@ function App() {
     const sortedTariffs = result.data.takstkoder.sort((a, b) => {
       return a.takstkode.localeCompare(b.takstkode);
     });
-
+    
     setTariffs(sortedTariffs);
   }, [url]);
 
@@ -62,8 +62,8 @@ function App() {
     if(subjectArea === "ALLE")
     {
       setUrl(`${API_ENDPOINT}?gyldigdato=${validDate}&takstkode=${tariffCode}`);
-    }
-    else
+    } 
+    else 
     {
       setUrl(`${API_ENDPOINT}?fagomraade=${subjectArea}&gyldigdato=${validDate}&takstkode=${tariffCode}`);
     }
@@ -87,8 +87,8 @@ function App() {
         <InputWithLabel id="tariffCodeInput" value={tariffCode} onInputChange={handleTariffCodeChange}>Takstkode: </InputWithLabel>
         <label><em> Filtrer takstene til en gitt kode, kan kombineres med de andre parametrene eller brukes alene.</em></label>
       </p>
-      <p>
-        <button onClick={handleGetTariffsClick}>Hent takster</button>
+      <p className="button-group">
+        <button className="fetch-button" onClick={handleGetTariffsClick}>Hent takster</button>
       </p>
       <TariffTable tariffs={tariffs} />
     </>

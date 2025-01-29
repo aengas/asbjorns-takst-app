@@ -50,6 +50,22 @@ body {
     padding: 5px 10px;
   }
   
+  .button-group {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .fetch-button {
+    width: auto;
+    padding: 10px 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .fetch-button {
+      width: 100%;
+    }
+  }
+  
   .tariff-container {
     display: flex;
     flex-direction: column;
