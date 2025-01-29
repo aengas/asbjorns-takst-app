@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  h1, h3 {
+    text-align: center;
+    color: #333;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  input, select, button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-group input {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .small-button {
+    width: auto;
+    padding: 5px 10px;
+  }
+  
+  .tariff-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .tariff-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .tariff-table th, .tariff-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .tariff-cards {
+    display: none;
+  }
+  
+  .tariff-card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+  }
+  
+  .tariff-card div {
+    margin-bottom: 5px;
+  }
+  
+  @media (max-width: 768px) {
+    .tariff-table {
+      display: none;
+    }
+  
+    .tariff-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+  }
+  
