@@ -2,6 +2,32 @@ import * as React from 'react';
 import axios from 'axios';
 import './App.css'; // Import the CSS file
 
+const tariffsReducer = (state, action) => {
+  switch(action.type) {
+    case 'TARIFFS_FETCH_INIT':
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    case 'TARIFFS_FETCH_SUCCESS':
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        data: action.payload,
+      }
+    case 'TARIFFS_FETCH_FAILURE':
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    default:
+      throw new Error();
+  }
+}
+
 const useStorageState = (key, initialState) => {
   const [value, setValue] = React.useState(
     localStorage.getItem(key) || initialState
@@ -19,14 +45,17 @@ const API_ENDPOINT = 'https://api.helsedirektoratet.no/helserefusjon/v1/takstkod
 function App() {
 
   const [validDate, setValidDate] = useStorageState('validDate', new Date().toISOString().split("T")[0]);
-
-  const [tariffs, setTariffs] = React.useState([]);
-
+  
   const [subjectArea, setSubjectArea] = useStorageState('subjectArea', 'PO');
   
   const [tariffCode, setTariffCode] = useStorageState('tariffCode', '');
   
   const [url, setUrl] = React.useState(`${API_ENDPOINT}?fagomraade=${subjectArea}&gyldigdato=${validDate}&takstkode=${tariffCode}`);
+
+  const [tariffs, dispatchTariffs] = React.useReducer(
+    tariffsReducer,
+    { data: [], isLoading: false, isError: false }
+  );
 
   const handleInputChange = (event) => {
     setValidDate(event.target.value);
@@ -37,13 +66,24 @@ function App() {
   };
 
   const handleGetTariffs = React.useCallback(async () => {
-    let result = await axios.get(url);
+    dispatchTariffs({ type: 'TARIFFS_FETCH_INIT' });
 
-    const sortedTariffs = result.data.takstkoder.sort((a, b) => {
-      return a.takstkode.localeCompare(b.takstkode);
-    });
-    
-    setTariffs(sortedTariffs);
+    try
+    {
+      let result = await axios.get(url);
+
+      const sortedTariffs = result.data.takstkoder.sort((a, b) => {
+        return a.takstkode.localeCompare(b.takstkode);
+      });
+
+      dispatchTariffs({
+        type:'TARIFFS_FETCH_SUCCESS',
+        payload: sortedTariffs,
+      })
+    } catch {
+      dispatchTariffs({ type: 'TARIFFS_FETCH_FAILURE' })
+    }
+   
   }, [url]);
 
   React.useEffect(() => {
@@ -94,7 +134,13 @@ function App() {
       <p className="button-group">
         <button className="fetch-button" onClick={handleGetTariffsClick}>Hent takster</button>
       </p>
-      <TariffTable tariffs={tariffs} />
+
+      {tariffs.isError && <p>Noe gikk galt under henting av takster...</p>}
+      {tariffs.isLoading ? (
+        <p>Henter takster...</p>
+      ):(
+        <TariffTable tariffs={tariffs.data} />
+      )}
     </>
   )
 }
