@@ -111,9 +111,11 @@ body {
     padding: 8px;
     border: 1px solid #ddd;
   }
-  
+
   .tariff-cards {
-    display: none;
+  display: none; /* Hide by default */
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 100vh; /* Prevent overflowing beyond screen */
   }
   
   .tariff-card {
@@ -131,16 +133,16 @@ body {
     margin-bottom: 5px;
   }
   
-  @media (max-width: 768px) {
-    .tariff-table {
-      display: none;
-    }
-  
-    .tariff-cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
+ /* Mobile-specific styles */
+@media (max-width: 768px) {
+  .tariff-table {
+    display: none; /* Hide the table on mobile */
   }
+
+  .tariff-cards {
+    display: block; /* Show the card view */
+    height: 100vh; /* Fill the entire screen height */
+    overflow-y: auto; /* Allow vertical scrolling */
+  }
+}
   
