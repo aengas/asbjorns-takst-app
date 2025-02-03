@@ -5,6 +5,12 @@ body {
     background-color: #f4f4f4;
   }
   
+  #root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
   h1, h3 {
     text-align: center;
     color: #333;
@@ -83,21 +89,27 @@ body {
   }
   
   .tariff-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-grow: 1;  /* Takes up remaining space */
+    overflow-y: auto; /* Enables vertical scrolling */
+    overflow-x: auto; /* Ensures horizontal scrolling remains */
+    min-height: 0; /* Prevents flex issues */
   }
   
   .tariff-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+  }
+  
+  .tariff-table thead {
+    position: sticky;
+    top: 0;
+    background-color: white; /* Ensures header stays visible */
+    z-index: 1;
   }
   
   .tariff-table th, .tariff-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
   }
   
   .tariff-cards {

@@ -129,7 +129,7 @@ function App() {
         <div className="input-group">
          <InputWithLabel id="tariffCodeInput" value={tariffCode} onInputChange={handleTariffCodeChange}>Takstkode: </InputWithLabel>
         </div>
-        <label><em> Filtrer takstene til en gitt kode, kan kombineres med de andre parametrene eller brukes alene.</em></label>
+        <label><em> Filtrer takstene til en gitt kode, kan kombineres med de andre parametrene eller brukes alene. %25 brukes for å angi wildcard søk. F.eks %25201%25 for å søke på alt som inneholder 201</em></label>
       </p>
       <p className="button-group">
         <button className="fetch-button" onClick={handleGetTariffsClick}>Hent takster</button>
@@ -194,11 +194,23 @@ const TariffTable = ({
           <th>Til dato</th>
           <th>Honorar</th>
           <th>Refusjon</th>
+          <th>Egenandel</th>
           <th>Pasient egenbetaling</th>
+          <th>Maks repetisjoner</th>
           <th>Repetisjonsprosent</th>
+          <th>Redusert ref fra repetisjon</th>
+          <th>Redusert repetisjonsprosent</th>
+          <th>Spesialisttakst</th>
           <th>Ugyldig kombinasjon</th>
-          <th>Tidsbruk per rep</th>
+          <th>Krever takst</th>
+          <th>Krever prosedyre</th>
+          <th>Krever diagnose</th>
+          <th>Maks antall per år</th>
+          <th>Maks antall per kalenderår</th>
+          <th>Maks antall gjelder pasient</th>
+          <th>Minimum tidsbruk</th>
           <th>Beskrivelse</th>
+          <th>Tidsbruk per rep</th>
         </tr>
       </thead>
       <tbody>
@@ -225,11 +237,23 @@ const TariffItem = ( {item }) => (
     <td>{item.tildato}</td>
     <td>{item.honorar}</td>
     <td>{item.refusjon}</td>
+    <td>{item.egenandel}</td>
     <td>{item.pasient_egenbetaling}</td>
+    <td>{item.maks_repetisjoner}</td>
     <td>{item.repetisjonsprosent}</td>
+    <td>{item.redusert_ref_fra_repetisjon}</td>
+    <td>{item.redusert_repetisjonsprosent}</td>
+    <td>{item.spesialisttakst}</td>
     <td>{item.ugyldig_kombinasjon}</td>
-    <td>{item.tidsbruk_per_rep}</td>
+    <td>{item.krever_takst}</td>
+    <td>{item.krever_prosedyre}</td>
+    <td>{item.krever_diagnose}</td>
+    <td>{item.maks_antall_per_aar}</td>
+    <td>{item.maks_antall_per_kalender_aar}</td>
+    <td>{item.maks_antall_gjelder_pasient}</td>
+    <td>{item.minimum_tidsbruk}</td>
     <td>{item.beskrivelse}</td>
+    <td>{item.tidsbruk_per_rep}</td>
   </tr>
 );
 
@@ -241,11 +265,23 @@ const TariffCard = ({ item }) => (
     <div><strong>Til dato:</strong> {item.tildato}</div>
     <div><strong>Honorar:</strong> {item.honorar}</div>
     <div><strong>Refusjon:</strong> {item.refusjon}</div>
+    <div><strong>Egenandel:</strong> {item.egenandel}</div>
     <div><strong>Pasient egenbetaling:</strong> {item.pasient_egenbetaling}</div>
+    <div><strong>Maks repetisjoner:</strong> {item.maks_repetisjoner}</div>
     <div><strong>Repetisjonsprosent:</strong> {item.repetisjonsprosent}</div>
+    <div><strong>Redusert ref fra repetisjon:</strong> {item.redusert_ref_fra_repetisjon}</div>
+    <div><strong>Redusert repetisjonsprosent</strong> {item.redusert_repetisjonsprosent}</div>
+    <div><strong>Spesialisttakst: </strong> {item.spesialisttakst}</div>
     <div><strong>Ugyldig kombinasjon:</strong> {item.ugyldig_kombinasjon}</div>
-    <div><strong>Tidsbruk per rep:</strong> {item.tidsbruk_per_rep}</div>
+    <div><strong>Krever takst: </strong> {item.krever_takst}</div>
+    <div><strong>Krever prosedyre: </strong> {item.krever_prosedyre}</div>
+    <div><strong>Krever diagnose: </strong> {item.krever_diagnose}</div>
+    <div><strong>Maks antall per år: </strong> {item.maks_antall_per_aar}</div>
+    <div><strong>Maks antall per kalenderår: </strong> {item.maks_antall_per_kalender_aar}</div>
+    <div><strong>Maks antall gjelder pasient: </strong> {item.maks_antall_gjelder_pasient}</div>
+    <div><strong>Minimum tidsbruk: </strong> {item.minimum_tidsbruk}</div>
     <div><strong>Beskrivelse:</strong> {item.beskrivelse}</div>
+    <div><strong>Tidsbruk per rep:</strong> {item.tidsbruk_per_rep}</div>
   </div>
 );
 
