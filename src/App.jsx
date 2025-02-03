@@ -115,22 +115,22 @@ function App() {
     <>
       <h1>Takster hentet fra Helsedirektoratets API</h1>
       <h3>Dette nettstedet er utviklet av Asbjørn Engås. Dette er <em>IKKE</em> et offisielt nettsted for Helsedirektoratet, og det har ingen tilknytning til Helsedirektoratet.</h3>
-      <p>
+    
         <div className="input-group">
          <SubjectAreaComboBox subjectArea={subjectArea} onSubjectAreaChange={handleSubjectAreaChange}/>
         </div>
-      </p>
+    
       <div className="input-group">
         <InputWithLabel id="validDateInput" value={validDate} onInputChange={handleInputChange}>Gyldig dato: </InputWithLabel>
         <button className="small-button" onClick={handleTodayClick}>Dagens dato</button>
       </div>
       <label><em> Filtrerer takstene til kun de som er gyldig på en gitt dato. Dato på formatet yyyy-MM-dd:</em></label>
-      <p>
-        <div className="input-group">
-         <InputWithLabel id="tariffCodeInput" value={tariffCode} onInputChange={handleTariffCodeChange}>Takstkode: </InputWithLabel>
-        </div>
-        <label><em> Filtrer takstene til en gitt kode, kan kombineres med de andre parametrene eller brukes alene. %25 brukes for å angi wildcard søk. F.eks %25201%25 for å søke på alt som inneholder 201</em></label>
-      </p>
+      
+      <div className="input-group">
+        <InputWithLabel id="tariffCodeInput" value={tariffCode} onInputChange={handleTariffCodeChange}>Takstkode: </InputWithLabel>
+      </div>
+      <label><em> Filtrer takstene til en gitt kode, kan kombineres med de andre parametrene eller brukes alene. %25 brukes for å angi wildcard søk. F.eks %25201%25 for å søke på alt som inneholder 201</em></label>
+ 
       <p className="button-group">
         <button className="fetch-button" onClick={handleGetTariffsClick}>Hent takster</button>
       </p>
