@@ -196,6 +196,7 @@ const TariffTable = ({
           <th>Refusjon</th>
           <th>Egenandel</th>
           <th>Pasient egenbetaling</th>
+          <th>Beskrivelse</th>
           <th>Maks repetisjoner</th>
           <th>Repetisjonsprosent</th>
           <th>Redusert ref fra repetisjon</th>
@@ -203,13 +204,10 @@ const TariffTable = ({
           <th>Spesialisttakst</th>
           <th>Ugyldig kombinasjon</th>
           <th>Krever takst</th>
-          <th>Krever prosedyre</th>
-          <th>Krever diagnose</th>
           <th>Maks antall per år</th>
           <th>Maks antall per kalenderår</th>
           <th>Maks antall gjelder pasient</th>
           <th>Minimum tidsbruk</th>
-          <th>Beskrivelse</th>
           <th>Tidsbruk per rep</th>
         </tr>
       </thead>
@@ -239,6 +237,7 @@ const TariffItem = ( {item }) => (
     <td>{item.refusjon}</td>
     <td>{item.egenandel}</td>
     <td>{item.pasient_egenbetaling}</td>
+    <td>{item.beskrivelse}</td>
     <td>{item.maks_repetisjoner}</td>
     <td>{item.repetisjonsprosent}</td>
     <td>{item.redusert_ref_fra_repetisjon}</td>
@@ -246,13 +245,10 @@ const TariffItem = ( {item }) => (
     <td>{item.spesialisttakst}</td>
     <td>{item.ugyldig_kombinasjon}</td>
     <td>{item.krever_takst}</td>
-    <td>{item.krever_prosedyre}</td>
-    <td>{item.krever_diagnose}</td>
     <td>{item.maks_antall_per_aar}</td>
     <td>{item.maks_antall_per_kalender_aar}</td>
     <td>{item.maks_antall_gjelder_pasient}</td>
     <td>{item.minimum_tidsbruk}</td>
-    <td>{item.beskrivelse}</td>
     <td>{item.tidsbruk_per_rep}</td>
   </tr>
 );
@@ -267,6 +263,7 @@ const TariffCard = ({ item }) => (
     <div><strong>Refusjon:</strong> {item.refusjon}</div>
     <div><strong>Egenandel:</strong> {item.egenandel}</div>
     <div><strong>Pasient egenbetaling:</strong> {item.pasient_egenbetaling}</div>
+    <div><strong>Beskrivelse:</strong> {item.beskrivelse}</div>
     <div><strong>Maks repetisjoner:</strong> {item.maks_repetisjoner}</div>
     <div><strong>Repetisjonsprosent:</strong> {item.repetisjonsprosent}</div>
     <div><strong>Redusert ref fra repetisjon:</strong> {item.redusert_ref_fra_repetisjon}</div>
@@ -274,13 +271,10 @@ const TariffCard = ({ item }) => (
     <div><strong>Spesialisttakst: </strong> {item.spesialisttakst}</div>
     <div><strong>Ugyldig kombinasjon:</strong> {item.ugyldig_kombinasjon}</div>
     <div><strong>Krever takst: </strong> {item.krever_takst}</div>
-    <div><strong>Krever prosedyre: </strong> {item.krever_prosedyre}</div>
-    <div><strong>Krever diagnose: </strong> {item.krever_diagnose}</div>
     <div><strong>Maks antall per år: </strong> {item.maks_antall_per_aar}</div>
     <div><strong>Maks antall per kalenderår: </strong> {item.maks_antall_per_kalender_aar}</div>
     <div><strong>Maks antall gjelder pasient: </strong> {item.maks_antall_gjelder_pasient}</div>
     <div><strong>Minimum tidsbruk: </strong> {item.minimum_tidsbruk}</div>
-    <div><strong>Beskrivelse:</strong> {item.beskrivelse}</div>
     <div><strong>Tidsbruk per rep:</strong> {item.tidsbruk_per_rep}</div>
   </div>
 );
