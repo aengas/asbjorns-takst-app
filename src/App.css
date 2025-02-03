@@ -5,12 +5,6 @@ body {
     background-color: #f4f4f4;
   }
   
-  #root {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  
   h1, h3 {
     text-align: center;
     color: #333;
@@ -114,8 +108,6 @@ body {
 
   .tariff-cards {
   display: none; /* Hide by default */
-  overflow-y: auto; /* Enable vertical scrolling */
-  max-height: 100vh; /* Prevent overflowing beyond screen */
   }
   
   .tariff-card {
@@ -140,9 +132,13 @@ body {
   }
 
   .tariff-cards {
-    display: block; /* Show the card view */
-    height: 100vh; /* Fill the entire screen height */
-    overflow-y: auto; /* Allow vertical scrolling */
+    display: block; /* Show card view */
+    overflow: visible; /* Remove internal scrolling */
+  }
+
+  html, body {
+    height: auto; /* Allow the body to expand with content */
+    overflow-y: auto; /* Ensure scrolling on the whole page */
   }
 }
   
