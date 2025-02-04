@@ -49,8 +49,10 @@ function App() {
   const [subjectArea, setSubjectArea] = useStorageState('subjectArea', 'PO');
   
   const [tariffCode, setTariffCode] = useStorageState('tariffCode', '');
+
+  const [description, setDescription] = useStorageState('description', '');
   
-  const [url, setUrl] = React.useState(`${API_ENDPOINT}?fagomraade=${subjectArea}&gyldigdato=${validDate}&takstkode=${tariffCode}`);
+  const [url, setUrl] = React.useState(`${API_ENDPOINT}?fagomraade=${subjectArea}&gyldigdato=${validDate}&takstkode=%25${tariffCode}%25&beskrivelse=%25${description}%25`);
 
   const [tariffs, dispatchTariffs] = React.useReducer(
     tariffsReducer,
@@ -98,14 +100,18 @@ function App() {
     setTariffCode(event.target.value);
   }
 
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  }
+
   const handleGetTariffsClick = (event) => {
     if(subjectArea === "ALLE")
     {
-      setUrl(`${API_ENDPOINT}?gyldigdato=${validDate}&takstkode=%25${tariffCode}%25`);
+      setUrl(`${API_ENDPOINT}?gyldigdato=${validDate}&takstkode=%25${tariffCode}%25&beskrivelse=%25${description}%25`);
     } 
     else 
     {
-      setUrl(`${API_ENDPOINT}?fagomraade=${subjectArea}&gyldigdato=${validDate}&takstkode=%25${tariffCode}%25`);
+      setUrl(`${API_ENDPOINT}?fagomraade=${subjectArea}&gyldigdato=${validDate}&takstkode=%25${tariffCode}%25&beskrivelse=%25${description}%25`);
     }
 
     event.preventDefault();
@@ -126,7 +132,11 @@ function App() {
       </div>
       
       <div className="input-group">
-        <InputWithLabel id="tariffCodeInput" value={tariffCode} onInputChange={handleTariffCodeChange} placeholder="Filtrer takstene til en gitt kode">Takstkode: </InputWithLabel>
+        <InputWithLabel id="tariffCodeInput" value={tariffCode} onInputChange={handleTariffCodeChange} placeholder="Filtrer takstene til en gitt kode">Takstkode..: </InputWithLabel>
+      </div>
+
+      <div className="input-group">
+        <InputWithLabel id="descriptionInput" value={description} onInputChange={handleDescriptionChange} placeholder="Filtrer på beskrivelsen til takstkoden">Beskrivelse: </InputWithLabel>
       </div>
  
       <p className="button-group">
