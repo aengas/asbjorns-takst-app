@@ -214,7 +214,6 @@ const TariffTable = ({
           <th>Krever takst</th>
           <th>Maks antall per år</th>
           <th>Maks antall per kalenderår</th>
-          <th>Maks antall gjelder pasient</th>
           <th>Minimum tidsbruk</th>
           <th>Tidsbruk per rep</th>
         </tr>
@@ -255,7 +254,6 @@ const TariffItem = ( {item }) => (
     <td>{item.krever_takst}</td>
     <td>{item.maks_antall_per_aar}</td>
     <td>{item.maks_antall_per_kalender_aar}</td>
-    <td>{item.maks_antall_gjelder_pasient}</td>
     <td>{item.minimum_tidsbruk}</td>
     <td>{item.tidsbruk_per_rep}</td>
   </tr>
@@ -281,7 +279,6 @@ const TariffCard = ({ item }) => (
     <div><strong>Krever takst: </strong> {item.krever_takst}</div>
     <div><strong>Maks antall per år: </strong> {item.maks_antall_per_aar}</div>
     <div><strong>Maks antall per kalenderår: </strong> {item.maks_antall_per_kalender_aar}</div>
-    <div><strong>Maks antall gjelder pasient: </strong> {item.maks_antall_gjelder_pasient}</div>
     <div><strong>Minimum tidsbruk: </strong> {item.minimum_tidsbruk}</div>
     <div><strong>Tidsbruk per rep:</strong> {item.tidsbruk_per_rep}</div>
   </div>
