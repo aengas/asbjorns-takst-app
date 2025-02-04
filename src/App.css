@@ -104,6 +104,7 @@ body {
   .tariff-table th, .tariff-table td {
     padding: 8px;
     border: 1px solid #ddd;
+    text-align: left;
   }
 
   .tariff-cards {
@@ -134,6 +135,9 @@ body {
   .tariff-cards {
     display: block; /* Show card view */
     overflow: visible; /* Remove internal scrolling */
+    word-wrap: break-word; /* Allows words to break onto the next line */
+    overflow-wrap: break-word; /* Ensures long words wrap correctly */
+    white-space: normal; /* Allows text to wrap */
   }
 
   html, body {

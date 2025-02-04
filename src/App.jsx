@@ -101,11 +101,11 @@ function App() {
   const handleGetTariffsClick = (event) => {
     if(subjectArea === "ALLE")
     {
-      setUrl(`${API_ENDPOINT}?gyldigdato=${validDate}&takstkode=${tariffCode}`);
+      setUrl(`${API_ENDPOINT}?gyldigdato=${validDate}&takstkode=%25${tariffCode}%25`);
     } 
     else 
     {
-      setUrl(`${API_ENDPOINT}?fagomraade=${subjectArea}&gyldigdato=${validDate}&takstkode=${tariffCode}`);
+      setUrl(`${API_ENDPOINT}?fagomraade=${subjectArea}&gyldigdato=${validDate}&takstkode=%25${tariffCode}%25`);
     }
 
     event.preventDefault();
@@ -129,7 +129,7 @@ function App() {
       <div className="input-group">
         <InputWithLabel id="tariffCodeInput" value={tariffCode} onInputChange={handleTariffCodeChange}>Takstkode: </InputWithLabel>
       </div>
-      <label><em> Filtrer takstene til en gitt kode, kan kombineres med de andre parametrene eller brukes alene. %25 brukes for å angi wildcard søk. F.eks %25201%25 for å søke på alt som inneholder 201</em></label>
+      <label><em> Filtrer takstene til en gitt kode, kan kombineres med de andre parametrene eller brukes alene.</em></label>
  
       <p className="button-group">
         <button className="fetch-button" onClick={handleGetTariffsClick}>Hent takster</button>
