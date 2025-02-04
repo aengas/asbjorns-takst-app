@@ -121,15 +121,13 @@ function App() {
         </div>
     
       <div className="input-group">
-        <InputWithLabel id="validDateInput" value={validDate} onInputChange={handleInputChange}>Gyldig dato: </InputWithLabel>
+        <InputWithLabel id="validDateInput" value={validDate} onInputChange={handleInputChange} placeholder="Filtrerer takstene til kun de som er gyldig på en gitt dato. Dato på formatet yyyy-MM-dd:">Gyldig dato: </InputWithLabel>
         <button className="small-button" onClick={handleTodayClick}>Dagens dato</button>
       </div>
-      <label><em> Filtrerer takstene til kun de som er gyldig på en gitt dato. Dato på formatet yyyy-MM-dd:</em></label>
       
       <div className="input-group">
-        <InputWithLabel id="tariffCodeInput" value={tariffCode} onInputChange={handleTariffCodeChange}>Takstkode: </InputWithLabel>
+        <InputWithLabel id="tariffCodeInput" value={tariffCode} onInputChange={handleTariffCodeChange} placeholder="Filtrer takstene til en gitt kode">Takstkode: </InputWithLabel>
       </div>
-      <label><em> Filtrer takstene til en gitt kode, kan kombineres med de andre parametrene eller brukes alene.</em></label>
  
       <p className="button-group">
         <button className="fetch-button" onClick={handleGetTariffsClick}>Hent takster</button>
@@ -174,10 +172,10 @@ const SubjectAreaComboBox = ({
   </>
 )
 
-const InputWithLabel = ({id, value, type='text', onInputChange, children}) => (
+const InputWithLabel = ({id, value, type='text', onInputChange, placeholder, children}) => (
   <>
     <label htmlFor={id}>{children}</label>
-    <input id={id} value={value} type={type} onChange={onInputChange}/>
+    <input id={id} value={value} type={type} onChange={onInputChange} placeholder={placeholder}/>
   </>
 );
 
